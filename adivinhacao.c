@@ -3,20 +3,21 @@
 
 int main(void){
     int chute;
-    unsigned int numerosecreto = 42;
+    unsigned int numerosecreto = 42, TENTATIVAS = 1;
     printf("=================================================\n");
     printf("\tBem-Vindo ao Jogo de Adivinhação!\n");
     printf("=================================================\n");
-    for (unsigned int i = 1; i <= NUMERO_DE_TENTATIVAS; i++){
-        printf("Qual é o seu %d° palpite?\t", i);
+    while (1){
+        printf("Qual é o seu %d° palpite?\t", TENTATIVAS);
         scanf("%d", &chute);
-        printf("Seu %do. palpite foi:\t%d", i, chute);
+        printf("Seu %do. palpite foi:\t%d", TENTATIVAS, chute);
+        TENTATIVAS++;
         short int acertou = chute == numerosecreto;
         short int maior = chute > numerosecreto;
         unsigned int invalido = chute < 0;
         if (invalido){
-            printf("\033[31mDigite um número positivo!\033[m\n");
-            i--;
+            printf("\033[31mVocê não pode chutar números negativos!\033[m\n");
+            TENTATIVAS--;
         } else if (acertou) {
             printf("\033[32m\nParabéns, Você acertou!\033[m\n");
             break;

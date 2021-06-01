@@ -1,9 +1,7 @@
 #include <stdio.h>
-#define NUMERO_DE_TENTATIVAS 3
 
 int main(void){
-    int chute;
-    unsigned int numerosecreto = 42, TENTATIVAS = 1;
+    int chute; double pontos = 1000, pontos_perdidos; unsigned int numerosecreto = 42, TENTATIVAS = 1;
     printf("=================================================\n");
     printf("\tBem-Vindo ao Jogo de Adivinhação!\n");
     printf("=================================================\n");
@@ -12,6 +10,12 @@ int main(void){
         scanf("%d", &chute);
         printf("Seu %do. palpite foi:\t%d", TENTATIVAS, chute);
         TENTATIVAS++;
+        if (chute > numerosecreto){
+            pontos_perdidos = (chute - numerosecreto) / 2.00;
+        }else{
+            pontos_perdidos = (numerosecreto - chute) / 2.00;
+        };
+        pontos -= pontos_perdidos;
         short int acertou = chute == numerosecreto;
         short int maior = chute > numerosecreto;
         unsigned int invalido = chute < 0;
@@ -27,6 +31,8 @@ int main(void){
                 printf("\033[33m\nSeu chute foi menor do que o número secreto! Mas não desanime, jogue novamente!\033[m\n");
             };
         };
+    printf("---------------------------\n");
+    printf("    Seus pontos:    %.2f\n", pontos);
     printf("---------------------------\n");
     printf("\tFim de Jogo!\n");
     printf("---------------------------\n");
